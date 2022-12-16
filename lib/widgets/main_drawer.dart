@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:s_07_navigation/screens/filters_screens.dart';
 
 class MainDrawer extends StatelessWidget {
-
-  Widget buildListTile() {
+  Widget buildListTile(String title, IconData icon, VoidCallback tapHandler) {
     return ListTile(
       leading: Icon(
-        Icons.settings,
+        icon,
         size: 26,
       ),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: 'RobotoCondense',
           fontSize: 24,
           fontWeight: FontWeight.bold,
         ),
       ),
-      onTap: () {},
-    ),
+      onTap: tapHandler,
+    );
   }
 
   @override
@@ -39,37 +39,13 @@ class MainDrawer extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary),
             ),
           ),
-          SizedBox(height: 20),
-          ListTile(
-            leading: Icon(
-              Icons.restaurant,
-              size: 26,
-            ),
-            title: Text(
-              'Meals',
-              style: TextStyle(
-                fontFamily: 'RobotoCondense',
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              size: 26,
-            ),
-            title: Text(
-              'Filters',
-              style: TextStyle(
-                fontFamily: 'RobotoCondense',
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            onTap: () {},
-          ),
+          const SizedBox(height: 20),
+          buildListTile('Meals', Icons.restaurant, () {
+            Navigator.of(context).pushReplacementNamed('/');
+          }),
+          buildListTile('Filters', Icons.settings, () {
+            Navigator.of(context).pushReplacementNamed(FiltersScreen.routeName);
+          }),
         ],
       ),
     );
